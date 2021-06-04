@@ -1,0 +1,19 @@
+{
+  "name": "books-directory",
+  "version": "1.0.0",
+  "description": "training NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yannis94/books-directory.git"
+  },
+  "author": "yannis94",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yannis94/books-directory/issues"
+  },
+  "homepage": "https://github.com/yannis94/books-directory#readme"
+}
