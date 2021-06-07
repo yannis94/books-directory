@@ -1,13 +1,14 @@
 const http = require('http')
 const fs = require("fs")
 const path = require("path")
+const mime = require("./config/mimeType")
 
 const host = '127.0.0.1'
 const port = 8080
 
+
 const server = http.createServer((req, res) => {
-    console.log(req.url)
-    //console.log(path.dirname(path.dirname(req.url)))
+    
     let directory = req.url
     while(path.dirname(directory) !== "/") {
         directory = path.dirname(directory)
@@ -18,7 +19,7 @@ const server = http.createServer((req, res) => {
             if (err) {
                 res.statusCode = 404
                 res.setHeader("Content-Type", 'text/html')
-                res.end("<h1>404, Not-found")
+                res.end("<h1>404, Not-found</h1>")
             }
             else {
                 res.statusCode = 200
@@ -28,25 +29,29 @@ const server = http.createServer((req, res) => {
         })
     }
     else if (directory === "/public") {
-        console.log("some path")
-        fs.readFile(`./${req.url}`, (err, file) => {
-            if (err) {
-                res.statusCode = 404
-                res.setHeader("Content-Type", 'text/html')
-                res.end("<h1>404, Not-found")
-            }
-            else {
-                res.statusCode = 200
-                //res.setHeader("Content-Type", 'text')
-                res.end(file)
-            }
+        
+        //set file extension & find the content-type html header
+
+        let ext = path.extname(req.url).replace(".", "")
+
+        let fileData = ''
+        const stream = fs.createReadStream(`./${req.url}`, 'UTF8')
+
+        stream.on('data', chunk => {
+                fileData += chunk
+        })
+
+        stream.on('end', ()=> {
+            res.statusCode = 200
+            res.setHeader("Content-Type", mime[ext])
+            res.end(fileData)
         })
     }
 
     else {
         res.statusCode = 403
         res.setHeader("Content-Type", 'text/html')
-        res.end("<h1>403, Acces forbiden")
+        res.end("<h1>403, Acces forbiden</h1>")
     }
 
 })
