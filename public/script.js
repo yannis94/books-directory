@@ -30,8 +30,8 @@ window.addEventListener("load", function() {
                     btn = document.createElement("div")
                     btn.id = "delete"
                     btn.innerText = "Delete"
-                    btn.dataset.id = book
-                    btn.addEventListener("click", function() { delBook(book) })
+                    btn.dataset.id = this.dataset.id
+                    btn.addEventListener("click", function() { delBook(this.dataset.id) })
                     document.querySelector('#formBook').appendChild(btn)
 
                     httpMethod = "PUT"
@@ -43,7 +43,13 @@ window.addEventListener("load", function() {
 })
 
 function delBook(id) {
-    console.log(id)
+    fetch(`${window.location.href}books`, {
+        headers: {
+            "Content-Type": "text/plain"
+        },
+        method: "DELETE",
+        body: id
+    })
 }
 
 document.querySelector("#button").addEventListener("click", function() {
