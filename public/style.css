@@ -1,0 +1,5 @@
+@import url('./components/title.css');
+
+body {
+    background-color: rgb(135, 135, 192);
+}
