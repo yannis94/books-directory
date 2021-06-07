@@ -86,7 +86,7 @@ const server = http.createServer((req, res) => {
                 const stream = fs.createReadStream("./books.json", 'UTF8')
 
                 stream.on('data', chunk => {
-                        fileData += chunk
+                    fileData += chunk
                 })
 
                 stream.on('end', ()=> {
@@ -134,6 +134,35 @@ const server = http.createServer((req, res) => {
         }
         else if (req.method === 'DELETE') {
             //delete data
+            let id = ''
+            req.on("data", chunk => {
+                id += chunk
+            })
+            req.on("end", () => {
+                
+                let db = ''
+                let updateDB = {}
+                const stream = fs.createReadStream("./books.json", 'UTF8')
+
+                stream.on('data', chunk => {
+                    db += chunk
+                })
+
+                stream.on('end', ()=> {
+                    books = JSON.parse(db)
+                    for (book in books) {
+                        if (book === id) {
+                            continue
+                        }
+                        else {
+                            updateDB[book] = books[book]
+                        }
+                    }
+                    fs.writeFile("./books.json", JSON.stringify(updateDB), err => console.log(err))
+                    res.statusCode = 200
+                    res.end()
+                })
+            })
         }
     }
 
