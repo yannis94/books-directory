@@ -2,22 +2,51 @@
 
 body {
     background-color: rgb(135, 135, 192);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
-#button {
+button {
     background-color: #6f881b;
-    padding: 5px;
-    width: 70px;
+    padding: 15px;
+    font-size: 15px;
+    color: white;
+    border-width: 0;
+}
+
+input {
+    padding: 10px;
+}
+
+#datas {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 10px;
+}
+
+.book:first-child {
+    grid-column: 1/2;
+    grid-row: 1;
 }
 
 .book {
-    width: 70%;
-    margin: 15px;
-    margin-left: 15%;
+    margin-bottom: 15px;
     background-color: #bada55;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #formBook {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 100%;
+    margin-top: 50px;
 }

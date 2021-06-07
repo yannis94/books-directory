@@ -7,7 +7,6 @@ const host = '127.0.0.1'
 const port = 8080
 
 const server = http.createServer((req, res) => {
-    console.log(req.url)
     
     let directory = req.url
     while(path.dirname(directory) !== "/") {
