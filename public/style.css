@@ -3,3 +3,21 @@
 body {
     background-color: rgb(135, 135, 192);
 }
+#button {
+    background-color: #6f881b;
+    padding: 5px;
+    width: 70px;
+}
+
+.book {
+    width: 70%;
+    margin: 15px;
+    margin-left: 15%;
+    background-color: #bada55;
+}
+
+#formBook {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
