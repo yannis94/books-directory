@@ -27,12 +27,14 @@ window.addEventListener("load", function() {
                     inputs[1].value = this.querySelector("h3").innerText
                     inputs[2].value = this.querySelector("p").innerText
 
-                    btn = document.createElement("div")
+                    btn = document.createElement("button")
                     btn.id = "delete"
                     btn.innerText = "Delete"
                     btn.dataset.id = this.dataset.id
                     btn.addEventListener("click", function() { delBook(this.dataset.id) })
                     document.querySelector('#formBook').appendChild(btn)
+
+                    document.querySelector("#button").innerText = "Update book"
 
                     httpMethod = "PUT"
                 })
