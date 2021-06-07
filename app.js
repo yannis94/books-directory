@@ -40,7 +40,7 @@ const server = http.createServer((req, res) => {
         const stream = fs.createReadStream(`./${req.url}`, 'UTF8')
 
         stream.on('data', chunk => {
-                fileData += chunk
+            fileData += chunk
         })
 
         stream.on('end', ()=> {
@@ -58,7 +58,7 @@ const server = http.createServer((req, res) => {
             const stream = fs.createReadStream("./books.json", 'UTF8')
 
             stream.on('data', chunk => {
-                    fileData += chunk
+                fileData += chunk
             })
 
             stream.on('end', ()=> {
@@ -105,6 +105,32 @@ const server = http.createServer((req, res) => {
         }
         else if (req.method === 'PUT') {
             //update data
+            let reqbody = ''
+
+
+            req.on('data', chunk => {
+                reqbody += chunk
+            })
+            req.on("end", () => {
+                updateContact = JSON.parse(reqbody)
+                updateContactId = Object.keys(updateContact)[0]
+                db = ''
+            
+                const stream = fs.createReadStream("./books.json", 'UTF8')
+
+                stream.on('data', chunk => {
+                    db += chunk
+                })
+
+                stream.on('end', ()=> {
+                    data = JSON.parse(db)
+                    data[updateContactId] = updateContact[updateContactId]
+                    //data[newBookId] = newBookDatas
+                    fs.writeFile("./books.json", JSON.stringify(data), err => console.log(err))
+                    res.statusCode = 200
+                    res.end()
+                })
+            })
         }
         else if (req.method === 'DELETE') {
             //delete data
