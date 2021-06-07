@@ -52,6 +52,9 @@ function delBook(id) {
         method: "DELETE",
         body: id
     })
+        .then(() => {
+            setTimeout(()=> location.reload(), 1000)
+        })
 }
 
 document.querySelector("#button").addEventListener("click", function() {
@@ -90,5 +93,8 @@ document.querySelector("#button").addEventListener("click", function() {
         method: httpMethod,
         body: JSON.stringify(bookObj) 
     })
+        .then(() => {
+            setTimeout(()=> location.reload(), 1000)
+        })
         .catch(err => console.log(err))
 })
